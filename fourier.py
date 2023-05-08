@@ -15,18 +15,30 @@ signal_10hz = Signal(amplitude=0.5, frequency=10, sampling_rate=200, duration=2)
 sine_10hz = signal_10hz.sine()
 
 # Sum the three signals to output the signal we want to analyze
-signal = sine_1hz # + sine_20hz + sine_10hz
+signal = sine_1hz + sine_20hz + sine_10hz
 
 # Plot the signal
-plt.plot(signal_1hz.time_axis, signal, 'b')
-plt.xlabel('Time [sec]')
-plt.ylabel('Amplitude')
-plt.title('Sum of three signals')
-plt.show()
+# plt.plot(signal_1hz.time_axis, signal, 'b')
+# plt.xlabel('Time [sec]')
+# plt.ylabel('Amplitude')
+# plt.title('Sum of three signals')
+# plt.show()
 
 # Apply the FFT on the signal
-fourier = fft(signal)
+fourier = rfft(signal)
+
+# Calculate N/2 to normalize the FFT output
+N = len(signal)
+normalize = N/2
+
+# Get the frequency components of the spectrum
+sampling_rate = 200.0
+frequency_axis = fftfreq(N, d=1.0/sampling_rate)
+norm_amplitude= (2*np.abs(fourier))/N
 
 # Plot the result (the spectrum |Xk|)
-plt.plot(np.abs(fourier))
+plt.plot(frequency_axis, norm_amplitude)
+plt.xlabel('Frequency[Hz]')
+plt.ylabel('Amplitude')
+plt.title('Spectrum')
 plt.show()

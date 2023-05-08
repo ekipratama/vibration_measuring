@@ -8,8 +8,8 @@ import time
 def loop(cycletools):
     timestamp_milliseconds = int(round(time.time() * 1000))
     
-    analog_value1 = rpi.io.AIn_1.value
-    analog_value2 = rpi.io.AIn_1.value
+    analog_value1 = rpi.io.AIn_0 .value
+    analog_value2 = rpi.io.AIn_2.value
     
     print(timestamp_milliseconds, analog_value1, analog_value2)
     
@@ -20,4 +20,4 @@ rpi = revpimodio2.RevPiModIO(autorefresh=True, monitoring=True)
 rpi.handlesignalend()
 
 # start cycle loop, cycle time in milliseconds
-rpi.cycleloop(loop, cycletime=20)
+rpi.cycleloop(loop, cycletime=1000)
