@@ -7,14 +7,14 @@ from scipy.fftpack import rfft, rfftfreq
 import numpy as np
 
 # Parameters
-x_len = 200
+x_len = 2000
 y_range = [1500, 2500]
 
 # Create figure for plotting
 fig = plt.figure()
 ax = fig.add_subplot(121)
 ax2 = fig.add_subplot(122)
-xs = list(range(0, 200))
+xs = list(range(0, 2000))
 ys = [0] * x_len
 ax.set_ylim(y_range)
 
