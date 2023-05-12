@@ -13,7 +13,6 @@ y_range = [1500, 2500]
 # Create figure for plotting
 fig = plt.figure()
 ax = fig.add_subplot(121)
-ax2 = fig.add_subplot(122)
 xs = list(range(0, 2000))
 ys = [0] * x_len
 ax.set_ylim(y_range)
@@ -43,7 +42,6 @@ def animate(i, ys):
     # Update line with new Y values
     line.set_ydata(ys)
     
-    ax2.plot(xf, np.abs(yf))
     return line,
 
 # create new instance of revpimodio2 in readonly (monitoring) mode
@@ -53,5 +51,5 @@ rpi = revpimodio2.RevPiModIO(autorefresh=True, monitoring=True)
 rpi.handlesignalend()    
 
 # Set up plot to call animate() function periodically
-ani = animation.FuncAnimation(fig, animate, fargs=(ys,), interval=50, blit=True)
+ani = animation.FuncAnimation(fig, animate, fargs=(ys,), interval=10, blit=True)
 plt.show()
