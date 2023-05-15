@@ -33,12 +33,14 @@ normalize = N/2
 
 # Get the frequency components of the spectrum
 sampling_rate = 200.0
-frequency_axis = fftfreq(N, d=1.0/sampling_rate)
+frequency_axis = rfftfreq(N, d=1.0/2000)
 norm_amplitude= (2*np.abs(fourier))/N
 
+print(N)
+
 # Plot the result (the spectrum |Xk|)
-plt.plot(frequency_axis, norm_amplitude)
-plt.xlabel('Frequency[Hz]')
-plt.ylabel('Amplitude')
-plt.title('Spectrum')
-plt.show()
+# plt.plot(frequency_axis, norm_amplitude)
+# plt.xlabel('Frequency[Hz]')
+# plt.ylabel('Amplitude')
+# plt.title('Spectrum')
+# plt.show()
