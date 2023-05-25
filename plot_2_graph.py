@@ -12,13 +12,13 @@ rpi = revpimodio2.RevPiModIO(autorefresh=True, monitoring=True)
 
 # catch SIGINT and handle proper release of all IOs
 rpi.handlesignalend()
-rpi.cycletime = 200 
+rpi.cycletime = 50 
 
 def data_gen():
     t1 = time()  
     t = data_gen.t
     cnt = 0
-    while cnt < 256:
+    while cnt < 1024:
         sensorData = Path('/sys/bus/iio/devices/iio:device1/in_voltage1_raw').read_text()
         volt = ((int (sensorData) * 12500) >> 21) + 6250
 #         volt = rpi.io.AIn_2.value

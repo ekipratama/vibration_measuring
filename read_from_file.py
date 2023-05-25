@@ -1,6 +1,7 @@
 import revpimodio2
 from pathlib import Path
 
+
 file = open('/sys/bus/iio/devices/iio:device1/in_voltage1_raw', 'r')
 
 def loop (cycletools):
