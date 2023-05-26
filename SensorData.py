@@ -6,7 +6,7 @@ xSample = []
 ySample = []
 
 sampleRate = 1024
-cycleTime = 200
+cycleTime = 250
 readMode = False
 
 rpi = revpimodio2.RevPiModIO(autorefresh=True, monitoring=True)

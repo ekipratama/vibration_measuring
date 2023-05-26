@@ -19,17 +19,21 @@ def plotGraph(x1Data, y1Data, x2Data, y2Data):
     fig.tight_layout()
     plt.show()
 
-def plot2(x1Data, y1Data, x2Data, y2Data):
+def plot2(x1Data, y1Data, x2Data, y2Data, x3Data, y3Data, x4Data, y4Data):
     
-    fig, ax = plt.subplots(1)
+    fig, axs = plt.subplots(2)
     
-    ax.grid()
-    ax.set_xlabel('Time (sec)')
-    ax.set_ylabel('Velocity (mm/s)')
+    axs[0].grid()
+    axs[0].set_xlabel('Time (sec)')
+    axs[0].set_ylabel('Velocity (mm/s)')
+    axs[1].grid()
+    axs[1].set_xlabel('Frequency (Hz)')
+    axs[1].set_ylabel('Velocity (mm/s)')
     
-    
-    ax.plot(x1Data, y1Data)
-    ax.plot(x2Data, y2Data, color = 'r')
+    axs[0].plot(x1Data, y1Data)
+    axs[0].plot(x2Data, y2Data, color = 'r')
+    axs[1].plot(x3Data, y3Data)
+    axs[1].plot(x4Data, y4Data, color = 'r')
     
     fig.tight_layout()
     plt.show()
