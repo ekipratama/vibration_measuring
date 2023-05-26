@@ -18,9 +18,24 @@ def plotGraph(x1Data, y1Data, x2Data, y2Data):
     axs[1].plot(x2Data, y2Data)
     fig.tight_layout()
     plt.show()
+
+def plot2(x1Data, y1Data, x2Data, y2Data):
     
-x1, y1 = SensorData.sampleData()
-y2 = rfft(y1)
-x2 = rfftfreq(len(y2), 1/2000)
+    fig, ax = plt.subplots(1)
+    
+    ax.grid()
+    ax.set_xlabel('Time (sec)')
+    ax.set_ylabel('Velocity (mm/s)')
+    
+    
+    ax.plot(x1Data, y1Data)
+    ax.plot(x2Data, y2Data, color = 'r')
+    
+    fig.tight_layout()
+    plt.show()
+
+# x1, y1 = SensorData.sampleData()
+# y2 = rfft(y1)
+# x2 = rfftfreq(len(y2), 1/2000)
 
 

@@ -13,9 +13,9 @@ def loadNpy(fileName):
 # unsigned int = %u
 # float = %f
 # see more at: https://numpy.org/doc/stable/reference/generated/numpy.savetxt.html
-def saveToCsv(data, fileName, format = "%d"):
+def saveToCsv(data, fileName, format = "%.2f"):
     np.savetxt(fileName, data, fmt = format)
 
-def loadCsv(fileName, dataType = int):
+def loadCsv(fileName, dataType = float):
     data = np.loadtxt(fileName, dtype = dataType)
     return data
