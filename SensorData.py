@@ -2,8 +2,8 @@ import revpimodio2
 import numpy as np
 from pathlib import Path
 
-xSample = []
-ySample = []
+xSample = np.array([])
+ySample = np.array([])
 
 sampleRate = 4096
 cycleTime = 10
@@ -13,20 +13,20 @@ rpi = revpimodio2.RevPiModIO(autorefresh=True, monitoring=True)
 rpi.handlesignalend()
 
 
-    
+def voltToVelocity(volt):
+    velocity = ((volt - 1880)/8120) * 25
+    return velocity
+
 def read():
-    return rpi.io.AIn_2.value
+    return voltToVelocity(rpi.io.AIn_2.value)
     
 
 def readRawData():
     rawData = Path('/sys/bus/iio/devices/iio:device1/in_voltage1_raw').read_text()
     dataInMv = ((int (rawData) * 12500) >> 21) + 6250
-    
 
-def writeToText(items):
+    return voltToVelocity(dataInMv)
     
-    np.savetxt('item.csv', items, delimiter = " ", fmt = '% s ')
-
 
 def addDataToSample(cycletools):
     data = read()
@@ -38,10 +38,15 @@ def addDataToSample(cycletools):
         rpi.exit()
         print("Done sampeling")
         return xSample, ySample
+    
     ySample.append(data)
     
 
-def sampleData():
+def sampleData(sample_rate = 4096, cycle_time = 10):
+    global sampleRate
+    global cycleTime
+    sampleRate = sample_rate
+    cycleTime = cycle_time
     print("sampeling data...")
     sample, sample1 = rpi.cycleloop(addDataToSample, cycleTime)
     
