@@ -3,6 +3,7 @@ import readWriteData as rwd
 import PlotData as plt
 import fourierTransform as ft
 import numpy as np
+from scipy.signal import find_peaks
 
 
 # def sampling():
