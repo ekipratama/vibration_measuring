@@ -16,6 +16,6 @@ def loadNpy(fileName):
 def saveToCsv(data, fileName, format = "%.2f"):
     np.savetxt(fileName, data, fmt = format)
 
-def loadCsv(fileName, dataType = float):
+def loadCsv(fileName, dataType = int):
     data = np.loadtxt(fileName, dtype = dataType)
     return data
