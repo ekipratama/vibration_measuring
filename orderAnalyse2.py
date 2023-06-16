@@ -45,13 +45,10 @@ order_3 = frequency_signal[3 * rotation_speed]
 
 # Plot order spectrum
 frequency_bins = np.fft.fftfreq(len(frequency_signal)) * rotation_speed
-plt.plot(frequency_bins[0:rotation_speed*3], np.abs(frequency_signal)[0:rotation_speed*3])
+plt.plot(frequency_bins, np.abs(frequency_signal))
 plt.xlabel('Order')
 plt.ylabel('Amplitude')
 plt.title('Order Spectrum')
 plt.grid(True)
-print(order_1)
-print(order_2)
-print(order_3)
 plt.show()
 
