@@ -5,6 +5,7 @@ import fourierTransform as ft
 import numpy as np
 
 
+
 # def sampling():
 #     x, y = sensor.sampleData()
 #     sampledData = np.array([x, y])
@@ -28,29 +29,31 @@ import numpy as np
 
 # Test Arduino
 
-yTime = []
+# yTime = []
 
-sample_rate = 2000
-data_point = 8192
-duration = data_point/sample_rate
-with open('samples/arduino_1500rpm_unbalance_8192s.txt', 'r') as file:
-    for line in file:
-        yTime.append(float(line))
+# sample_rate = 2000
+# data_point = 4096
+# duration = data_point/sample_rate
+# with open('samples/arduino_1500rpm_loose_4096s.txt', 'r') as file:
+#     for line in file:
+#         velocity = ((float(line) - 180) / (901 - 180)) * 25
+#         yTime.append(velocity*4)
 
-xTime = np.arange(0, duration, duration/data_point)
+# xTime = np.arange(0, duration, duration/data_point)
+# # xFreq, yFreq = ft.calculateFourier(xTime, yTime)
+# # plt.plotGraph(xTime, yTime, xFreq[1:], 2*np.abs(yFreq[1:])/(len(yFreq[1:]/2)))
 
+# fourierTransform = np.fft.fft(yTime)/len(yTime)
+# fourierTransform = np.fft.fft(yTime)
+# fourierTransform = fourierTransform[range(int(len(yTime)/2))]
+# samplingFrequency = data_point/duration
+# tpCount = len(yTime)
+# values = np.arange(int(tpCount/2))
+# timePeriod = tpCount/samplingFrequency
+# frequencies = values/timePeriod
+# fourierTransform[0] = 0
 
-fourierTransform = np.fft.fft(yTime)/len(yTime)
-fourierTransform = np.fft.fft(yTime)
-fourierTransform = fourierTransform[range(int(len(yTime)/2))]
-samplingFrequency = data_point/duration
-tpCount = len(yTime)
-values = np.arange(int(tpCount/2))
-timePeriod = tpCount/samplingFrequency
-frequencies = values/timePeriod
-fourierTransform[0] = 0
-
-plt.plotGraph(xTime, yTime, frequencies, np.abs(fourierTransform))
+# plt.plotGraph(xTime, yTime, frequencies, np.abs(fourierTransform), showPeak=True)
 
 # Test arduino 3d
 
@@ -63,7 +66,7 @@ plt.plotGraph(xTime, yTime, frequencies, np.abs(fourierTransform))
 #     for line in file:
 #         yTime.append(float(line))
 
-# with open('samples/arduino_1500rpm_unbalance_4096s.txt', 'r') as file2:
+# with open('samples/arduino_1000rpm_normal_4096s.txt', 'r') as file2:
 #     for line in file2:
 #         yTime2.append(float(line))
 
@@ -79,7 +82,6 @@ plt.plotGraph(xTime, yTime, frequencies, np.abs(fourierTransform))
 # timePeriod = tpCount/samplingFrequency
 # frequencies = values/timePeriod
 # fourierTransform[0] = 0
-# print(frequencies)
 
 # fourierTransform2 = np.fft.fft(yTime2)/len(yTime2)
 # fourierTransform2 = np.fft.fft(yTime2)
@@ -91,37 +93,38 @@ plt.plotGraph(xTime, yTime, frequencies, np.abs(fourierTransform))
 # frequencies2 = values2/timePeriod2
 # fourierTransform2[0] = 0
 
-# plt.compare2Data3d(frequencies, fourierTransform, frequencies2, fourierTransform2)
+# plt.compare2Data3d(frequencies, np.abs(fourierTransform), frequencies2, np.abs(fourierTransform2))
 
 
 
 # Test Esp32
-# xTime = []
-# yTime = []
-# with open('samples/samples_1500rpm_normal_sensor_ifm_sp_10k_left_bearing.txt', 'r') as file:
-#     for line in file:
-#         # Extract x and y values from each line
-#         x, y = line.strip().split(',')
-#         x = float(x)
-#         y = float(y)
+xTime = []
+yTime = []
+with open('samples/samples_1500rpm_unbalance_sensor_ifm_sp_10k_bearing.txt', 'r') as file:
+    for line in file:
+        # Extract x and y values from each line
+        x, y = line.strip().split(',')
+        x = float(x)
+        y = float(y)
 
-#         # Append the values to the samples list
-#         xTime.append(x)
-#         yTime.append(y)
+        # Append the values to the samples list
+        xTime.append(x)
+        yTime.append(y)
 
 # xTime = np.linspace(0, max(xTime), max(xTime)/len(yTime))
-# yTime = yTime
-# #fourierTransform = np.fft.fft(yTime)/len(yTime)
-# fourierTransform = np.fft.fft(yTime)
-# fourierTransform = fourierTransform[range(int(len(yTime)/2))]
-# samplingFrequency = len(yTime)/max(xTime)
-# tpCount = len(yTime)
-# values = np.arange(int(tpCount/2))
-# timePeriod = tpCount/samplingFrequency
-# frequencies = values/timePeriod
-# fourierTransform[0] = 0
+xTime = xTime[:4096]
+yTime = yTime[:4096]
+#fourierTransform = np.fft.fft(yTime)/len(yTime)
+fourierTransform = np.fft.fft(yTime)
+fourierTransform = fourierTransform[range(int(len(yTime)/2))]
+samplingFrequency = len(yTime)/max(xTime)
+tpCount = len(yTime)
+values = np.arange(int(tpCount/2))
+timePeriod = tpCount/samplingFrequency
+frequencies = values/timePeriod
+fourierTransform[0] = 0
 
-# plt.plotGraph(xTime, yTime, frequencies, np.abs(fourierTransform))
+plt.plotGraph(xTime, yTime, frequencies, np.abs(fourierTransform))
 
 
 # Test rberry pi pico data
