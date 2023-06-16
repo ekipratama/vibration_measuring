@@ -45,14 +45,14 @@ line = [line1, line2]
 
 # the same axes initalizations as before (just now we do it for both of them)
 
-ax1.set_ylim(0 , 1)
+ax1.set_ylim(0 , 10)
 ax1.set_xlim(0, 100)
 ax1.grid()
 ax1.set_xlabel('Samples')
 ax1.set_ylabel('Velocity [mm/s]')
 
 
-ax2.set_ylim(0, 1)
+ax2.set_ylim(0, 10 )
 ax2.set_xlim(0, 100)
 ax2.grid()
 ax2.set_xlabel('Time [s] ')
@@ -80,13 +80,13 @@ def run(data):
         ax2.set_xlim(xmin, 2*xmax)
         ax2.figure.canvas.draw()
     
-    ymin, ymax = ax1.get_ylim()
-    ymin = min(y1data)
-    if y1 >= ymax:
-        ax1.set_ylim(ymin, 1.002*ymax)
-        ax1.figure.canvas.draw()
-        ax2.set_ylim(ymin, 1.002*ymax)
-        ax2.figure.canvas.draw()
+#     ymin, ymax = ax1.get_ylim()
+#     ymin = min(y1data)
+#     if y1 >= ymax:
+#         ax1.set_ylim(ymin, 1.002*ymax)
+#         ax1.figure.canvas.draw()
+#         ax2.set_ylim(ymin, 1.002*ymax)
+#         ax2.figure.canvas.draw()
     
     
     
