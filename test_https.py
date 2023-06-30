@@ -37,7 +37,7 @@ try:
             print(json_response)
             json_string = str(json_response)
             json_string = str.replace(json_string, '\'', '\"')
-            prtg_request_URL = 'https://' + prtg_host + ':' + prtg_host_port + '/' + prtg_sensor_token + '?content=' + json_string
+            prtg_request_URL = 'http://' + prtg_host + ':' + prtg_host_port + '/' + prtg_sensor_token + '?content=' + json_string
             print(prtg_request_URL)
             request = requests.get(prtg_request_URL)
             print(request.status_code)
