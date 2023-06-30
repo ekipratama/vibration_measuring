@@ -68,6 +68,8 @@ ax2.set_ylabel('Velocity [mm/s]')
 x1data, x2data, y1data, y2data = [], [], [], []
 peakAverage = []
 downAverage = []
+tresholdWarning = 2
+tresholdInterrupt = 1
 flag = False
 def run(data):
 
@@ -75,15 +77,20 @@ def run(data):
     y1, t_sec = data
     
     
-    if y1 > 2:
+    if y1 > tresholdWarning:
         peakAverage.append(y1)
         downAverage.clear()
         y2data.append(average(peakAverage))
         currentAverageValue = average(peakAverage)
         flag = True
-    elif y1 <= 2:
+    elif y1 <= tresholdWarning:
         if flag:
-            pass
+            if tresholdInterrupt < y1:
+                if tresholdWarning =< y1:
+                    pass
+                else:
+                    flag = False
+                    
         else:
             downAverage.append(y1)
             peakAverage.clear()
