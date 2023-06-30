@@ -6,11 +6,12 @@ xSample = []
 ySample = []
 
 sampleRate = 1024
-cycleTime = 250
+cycleTime = 1000
 readMode = False
 
 rpi = revpimodio2.RevPiModIO(autorefresh=True, monitoring=True)
 rpi.handlesignalend()
+rpi.cycletime = 1000
 raw = open('/sys/bus/iio/devices/iio:device1/in_voltage1_raw', 'r')
 
 
@@ -52,3 +53,4 @@ def sampleData():
     return sample, sample1
 
 
+ 
