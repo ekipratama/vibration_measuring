@@ -55,6 +55,7 @@ ax1.set_xlim(0, 100)
 ax1.grid()
 ax1.set_xlabel('Time [s]')
 ax1.set_ylabel('Velocity [mm/s]')
+ax1.set_title('Time Domain')
 
 
 ax2.set_ylim(0, 25)
@@ -62,7 +63,7 @@ ax2.set_xlim(0, 100)
 ax2.grid()
 ax2.set_xlabel('Time [s] ')
 ax2.set_ylabel('Velocity [mm/s]')
-
+ax2.set_title('Average value')
 
 # initialize the data arrays 
 x1data, x2data, y1data, y2data = [], [], [], []
@@ -72,30 +73,24 @@ tresholdWarning = 2
 tresholdInterrupt = 1
 flag = False
 def run(data):
-
+    global flag
+    global currentAverageValue
     # update the data
     y1, t_sec = data
     
     
     if y1 > tresholdWarning:
+        
         peakAverage.append(y1)
         downAverage.clear()
         y2data.append(average(peakAverage))
         currentAverageValue = average(peakAverage)
-        flag = True
-    elif y1 <= tresholdWarning:
-        if flag:
-            if tresholdInterrupt < y1:
-                if tresholdWarning =< y1:
-                    pass
-                else:
-                    flag = False
-                    
-        else:
-            downAverage.append(y1)
-            peakAverage.clear()
-            y2data.append(average(downAverage))
-            currentAverageValue = average(downAverage)
+
+    else:
+        downAverage.append(y1)
+        peakAverage.clear()
+        y2data.append(average(downAverage))
+        currentAverageValue = average(downAverage)
     
     x1data.append(t_sec)
     y1data.append(y1)
@@ -146,5 +141,5 @@ def run(data):
 
 ani = animation.FuncAnimation(fig, run, data_gen, blit=True, interval=200 ,
     repeat=False)
-
+fig.tight_layout()
 plt.show()
